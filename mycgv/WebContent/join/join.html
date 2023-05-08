@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<title>MyCGV</title>
 	<link rel="stylesheet" href="http://localhost:9000/mycgv/css/mycgv.css">
-	<script src="http://localhost:9000/mycgv/js/mycgv_javascript.js"></script>
+	<script src="http://localhost:9000/mycgv/js/jquery-3.6.4.js"></script> <!-- 순서 확인 -->
+	<script src="http://localhost:9000/mycgv/js/mycgv_jquery.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -29,6 +31,7 @@
 					<li>
 						<label>비밀번호 확인</label>
 						<input type = "password" name="cpass" class="input1" id='cpass'>
+						<span id="cmsg"></span>
 					</li>
 					<li>
 						<label>성명</label>
@@ -41,20 +44,21 @@
 					</li>
 					<li>
 						<label>이메일</label>
-						<input type ="text" name="email1" id='email1'>@
-						<input type ="text" name="email2" id='email2'>
-						<select>
-								<option value=default id="email3">선택</option> 
-								<option value ="naver">naver.com</option>
-								<option value="google">gmail.com</option> 
-								<option value="daum">daum.com</option> 
-								<option value="nate">nate.com</option> 
+						<input type="text" name="email1" id="email1"> @
+						<input type="text" name="email2" id="email2">
+						<select id="email3" onchange="emailCheck()">
+							<option value="default">선택</option>
+							<option value="naver.com">네이버</option>
+							<option value="gmail.com">구글</option>
+							<option value="daum.net">다음</option>
+							<option value="korea.com">코리아</option>
+							<option value="self">직접입력</option>
 						</select>
 					</li>
 					<li>
 						<label>주소</label>
 						<input type ="text" name="address" class="inpu1" id="addr1">
-						<button type = "button" class="btn_style2">주소찾기</button>
+						<button type = "button" class="btn_style2" id="btnSearchAddr">주소찾기</button>
 					</li>
 					<li>
 						<label>상세주소    </label>
@@ -62,9 +66,9 @@
 					</li>
 					<li>
 						<label>휴대폰</label>
-							<input type="radio" name="phone" value="SKT"><span>SKT</span>
-							<input type="radio" name="phone" value="LGU+"><span>LGU+</span>
-							<input type="radio" name="phone" value="KT"><span>KT</span>
+							<input type="radio" name="tel" value="SKT"><span>SKT</span>
+							<input type="radio" name="tel" value="LGU+"><span>LGU+</span>
+							<input type="radio" name="tel" value="KT"><span>KT</span>
 							
 							<select name="phone1" id="phone1">
 								<option value=default>선택</option> 
@@ -87,7 +91,7 @@
 						<textarea name="intro" placeholder="*200자 이내로 작성해주세요"></textarea>
 					</li>
 					<li>
-						<button type = "button" class="btn_style" onclick="joinCheck()">가입하기</button>
+						<button type = "button" class="btn_style" id="btnJoin">가입하기</button>
 						<button type="reset" class="btn_style">다시입력</button>
 					</li>
 				</ul>	
